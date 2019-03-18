@@ -37,27 +37,27 @@ WHERE gdp > ALL(SELECT gdp FROM world WHERE continent='Europe'AND gdp > 0)
 SELECT continent, name, area FROM world x
   WHERE area >= ALL
     (SELECT area FROM world y
-        WHERE y.continent=x.continent
+        WHERE y.continent = x.continent
           AND area > 0)
 
 -- 8
 SELECT continent, name FROM world x
   WHERE name =
     (SELECT name FROM world y
-        WHERE y.continent=x.continent
+        WHERE y.continent = x.continent
           ORDER BY name LIMIT 1)
 
 -- 9
 SELECT name, continent, population FROM world
   WHERE continent IN 
     (SELECT DISTINCT continent FROM world 
-      GROUP BY continent HAVING MAX(population)<=25000000)
+      GROUP BY continent HAVING MAX(population) <= 25000000)
 
 -- 10
 SELECT name, continent FROM world x
   WHERE population >= 
     ALL(SELECT population*3 FROM world y 
-      WHERE x.continent=y.continent AND x.name !=y.name)
+      WHERE x.continent=y.continent AND x.name != y.name)
 
 
 -- QUIZ (https://sqlzoo.net/wiki/Nested_SELECT_Quiz)
